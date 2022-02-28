@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exercise
+  template:
+    metadata:
+      labels:
+        app: exercise
+    spec:
+      containers:
+        - name: exercise
+          image: mohamedemad1/exercise
+          env:
+            - name: MONGO_URI
+              value: mongodb://exercise-mongo-cluster-ip-service:27017/exercise
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret-jogging
+                  key: JWT_KEY
+            - name: NATS_CLUSTER_ID
+              value: exercise
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: http://nats-cluster-ip-service:4222

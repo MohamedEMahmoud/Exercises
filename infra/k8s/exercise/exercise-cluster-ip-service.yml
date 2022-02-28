@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: exercise-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: exercise
+  ports:
+    - name: exercise
+      protocol: TCP
+      port: 3000
