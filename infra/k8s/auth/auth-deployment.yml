@@ -21,7 +21,7 @@ spec:
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
-                  name: jwt-secret
+                  name: jwt-secret-jogging
                   key: JWT_KEY
             - name: CLOUDINARY_NAME
               value: micro-services
@@ -60,3 +60,5 @@ spec:
                   fieldPath: metadata.name
             - name: NATS_URL
               value: http://nats-cluster-ip-service:4222
+            - name: RESET_PASSWORD_EXPIRATION_KEY
+              value: "36e5"
