@@ -10,7 +10,7 @@ router.get("/api/auth/admin-email",
 
         const admin = await User.findById(req.currentUser!.id);
 
-        if (admin?.role !== RoleType.Admin) {
+        if (!admin || admin.role !== RoleType.Admin) {
             throw new BadRequestError("User have no this permission");
         }
 
