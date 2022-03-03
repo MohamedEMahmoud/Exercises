@@ -11,6 +11,7 @@ import { deleteExerciseRouter } from "./routes/delete";
 import { exercise_finish_Router } from "./routes/exercise_finish";
 import { exerciseReportRouter } from "./routes/report";
 import { coachCreateExerciseToTrainee } from "./routes/coach/new";
+import { coachDeleteExerciseToTrainee } from "./routes/coach/delete";
 import { coachUpdateExerciseToTrainee } from "./routes/coach/update";
 import { showAllTraineesExercisesToCoach } from "./routes/coach/show";
 import { ShowAllTraineeExercisesToCoach } from "./routes/coach/show_exercise_trainee";
@@ -32,6 +33,7 @@ app.use([
   exercise_finish_Router,
   exerciseReportRouter,
   coachCreateExerciseToTrainee,
+  coachDeleteExerciseToTrainee,
   coachUpdateExerciseToTrainee,
   showAllTraineesExercisesToCoach,
   ShowAllTraineeExercisesToCoach,
