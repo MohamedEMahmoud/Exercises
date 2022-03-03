@@ -31,3 +31,12 @@ spec:
                   fieldPath: metadata.name
             - name: NATS_URL
               value: http://nats-cluster-ip-service:4222
+            - name: CLOUDINARY_NAME
+              value: micro-services
+            - name: CLOUDINARY_API_KEY
+              value: "467668724553657"
+            - name: CLOUDINARY_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cloudinary-api-secret
+                  key: CLOUDINARY_API_SECRET
