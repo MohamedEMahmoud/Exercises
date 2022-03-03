@@ -12,11 +12,11 @@ router.patch("/api/auth/admin-email",
 
         const admin = await User.findById(req.currentUser!.id);
 
-        if (admin?.role !== RoleType.Admin) {
+        if (!admin || admin.role !== RoleType.Admin) {
             throw new BadRequestError("User have no this permission");
         }
 
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email: req.query.email });
 
         if (!user || !user.email.includes("@jogging")) {
             throw new BadRequestError("User Not Found");
