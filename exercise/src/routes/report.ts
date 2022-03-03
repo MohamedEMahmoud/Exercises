@@ -15,7 +15,7 @@ router.get('/api/exercise/report', requireAuth, async (req: Request, res: Respon
         trainee: currentUser!.role === RoleType.Trainee ? currentUser!.id : undefined,
         coach: currentUser!.role === RoleType.Coach ? currentUser!.id : undefined
     });
-    const jogging = exercises.filter(exercise => exercise.distance);
+    const jogging = exercises.filter(exercise => exercise.distance && exercise.done);
 
     if (jogging.length === 0) {
         throw new BadRequestError("No Jogging Time");
@@ -99,8 +99,8 @@ router.get('/api/exercise/report', requireAuth, async (req: Request, res: Respon
 
     res.status(200).send({ status: 200, report, success: true });
 
-
 });
+
 const diff_weeks = (dt2: Date, dt1: Date) => {
     let diff = (dt2.getTime() - dt1.getTime()) / 1000;
     diff /= (60 * 60 * 24 * 7);
