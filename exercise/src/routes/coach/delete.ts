@@ -33,7 +33,7 @@ router.delete('/api/exercise/coach', requireAuth, async (req: Request, res: Resp
 
     await exercise.deleteOne();
 
-    res.send({ status: 204, message: "Task has been deleted Successfully!", success: true });
+    res.send({ status: 204, message: "Exercise has been deleted Successfully!", success: true });
 });
 
-export { router as deleteExerciseRouter };
+export { router as coachDeleteExerciseToTrainee };
