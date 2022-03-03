@@ -11,9 +11,9 @@ router.delete("/api/auth/admin",
     requireAuth,
     async (req: Request, res: Response) => {
 
-        const user = await User.findById(req.currentUser!.id);
+        const admin = await User.findById(req.currentUser!.id);
 
-        if (user?.role !== RoleType.Admin) {
+        if (!admin || admin.role !== RoleType.Admin) {
             throw new BadRequestError("User have no this permission");
         }
 
