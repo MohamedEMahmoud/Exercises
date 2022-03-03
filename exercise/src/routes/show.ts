@@ -13,6 +13,7 @@ router.get('/api/exercise', requireAuth, async (req: Request, res: Response) => 
         exercises = await Exercise.find({ trainee: currentUser!.id });
     } else {
         exercises = await Exercise.find({ coach: currentUser!.id });
+        exercises = exercises.filter(exercise => !exercise.trainee);
     }
 
     if (exercises.length === 0) {
