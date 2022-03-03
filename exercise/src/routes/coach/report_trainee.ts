@@ -27,7 +27,7 @@ router.get('/api/exercise/coach-report', requireAuth, async (req: Request, res: 
 
     const exercises = await Exercise.find({ coachId: coach.id, trainee: trainee.id });
 
-    const jogging = exercises.filter(exercise => exercise.distance);
+    const jogging = exercises.filter(exercise => exercise.distance && exercise.done);
 
     if (jogging.length === 0) {
         throw new BadRequestError("No Jogging Time");
