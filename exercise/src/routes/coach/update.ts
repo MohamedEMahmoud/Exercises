@@ -86,9 +86,9 @@ const msToTime = (duration: number) => {
         calc_minutes = Math.floor((duration / (1000 * 60)) % 60),
         calc_hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    const hours = (calc_hours < 10) ? `0 ${calc_hours}` : calc_hours,
-        minutes = (calc_minutes < 10) ? `0 ${calc_minutes}` : calc_minutes,
-        seconds = (calc_seconds < 10) ? `0 ${calc_seconds}` : calc_seconds;
+    const hours = (calc_hours < 10) ? `0${calc_hours}` : calc_hours,
+        minutes = (calc_minutes < 10) ? `0${calc_minutes}` : calc_minutes,
+        seconds = (calc_seconds < 10) ? `0${calc_seconds}` : calc_seconds;
 
     return `${hours}:${minutes}:${seconds}.${milliseconds}`;
 };
