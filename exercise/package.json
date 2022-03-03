@@ -10,7 +10,7 @@
     "author": "MohamedEMahmoud",
     "license": "ISC",
     "dependencies": {
-        "@jogging/common": "^1.0.10",
+        "@jogging/common": "^1.0.11",
         "@types/cookie-session": "^2.0.44",
         "@types/express": "^4.17.13",
         "@types/lodash": "^4.14.178",
