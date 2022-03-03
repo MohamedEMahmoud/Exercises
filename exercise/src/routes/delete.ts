@@ -12,7 +12,7 @@ router.delete('/api/exercise', requireAuth, async (req: Request, res: Response) 
         throw new BadRequestError('Exercise Not Found');
     }
 
-    res.send({ status: 204, message: "Task has been deleted Successfully!", success: true });
+    res.send({ status: 204, message: "Exercise has been deleted Successfully!", success: true });
 });
 
 export { router as deleteExerciseRouter };
