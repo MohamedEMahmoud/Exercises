@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { User } from "../../models/user.model";
-import { requireAuth, BadRequestError, upload } from "@jogging/common";
+import { requireAuth, BadRequestError, upload, RoleType } from "@jogging/common";
 import { UserUpdatedPublisher } from "../../events/publishers/user-updated-publisher";
 import { natsWrapper } from "../../nats-wrapper";
 
@@ -12,6 +12,11 @@ router.post("/api/auth/trainee-register",
     async (req: Request, res: Response) => {
 
         const trainee = await User.findById(req.currentUser!.id);
+
+        if (!trainee || trainee.role !== RoleType.Trainee) {
+            throw new BadRequestError("User have no this permission");
+
+        }
 
         const coach = await User.findOne({ coachName: req.body.coachName });
         if (!coach) {
