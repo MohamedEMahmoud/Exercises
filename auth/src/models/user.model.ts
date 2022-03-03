@@ -7,19 +7,19 @@ interface UserAttrs {
     username: string;
     email: string;
     password: string;
-    gender: GenderType;
+    gender?: GenderType;
     picture: string;
     role: RoleType;
-    age: number;
+    age?: number;
     macAddress: { MAC: String; }[];
     active: boolean;
     activeKey: string;
     resetPasswordKey: string;
     resetPasswordExpires: string;
     isReserved: boolean;
-    Creator: string;
-    coachId: string;
-    coachName: string;
+    Creator?: string;
+    coachId?: string;
+    coachName?: string;
 };
 
 interface UserDoc extends mongoose.Document {
@@ -71,7 +71,6 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        required: true,
         trim: true,
         lowercase: true,
         enum: Object.values(GenderType),
@@ -82,6 +81,7 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         trim: true,
+        required: true,
         enum: Object.values(RoleType),
     },
     age: {
