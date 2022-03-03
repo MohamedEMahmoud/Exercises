@@ -7,12 +7,11 @@ const router = express.Router();
 router.post("/api/auth/admin",
     upload.none(),
     requireAuth,
-    validateRequest,
     async (req: Request, res: Response) => {
 
         const admin = await User.findById(req.currentUser!.id);
 
-        if (admin?.role !== RoleType.Admin) {
+        if (!admin || admin.role !== RoleType.Admin) {
             throw new BadRequestError("User have no this permission");
         }
 
