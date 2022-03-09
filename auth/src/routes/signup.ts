@@ -113,16 +113,20 @@ router.post("/api/auth/signup",
                 return user.macAddress.push({ MAC: addr });
             }
         });
-        const client = new OAuth2Client(
-            process.env.CLIENT_ID,
-            process.env.CLIENT_SECRET,
-            process.env.REDIRECT_URI
-        );
 
-        client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
         let accessToken;
         try {
+
+            const client = new OAuth2Client(
+                process.env.CLIENT_ID,
+                process.env.CLIENT_SECRET,
+                process.env.REDIRECT_URI
+            );
+
+            client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+
             accessToken = await client.getAccessToken();
+            
         } catch (err) { }
 
         const activeKey = randomBytes(8).toString("hex").toLowerCase();
@@ -193,13 +197,7 @@ router.post("/api/auth/signup",
     });
 
 const nodemailerAccessTokenIsExpired = (accessToken: any) => {
-    if (!accessToken) {
-        return {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS,
-        };
-    }
-    else {
+    if (accessToken) {
         return {
             type: "OAuth2",
             user: process.env.MAIL_USER,
@@ -208,6 +206,12 @@ const nodemailerAccessTokenIsExpired = (accessToken: any) => {
             clientSecret: process.env.CLIENT_SECRET,
             refreshToken: process.env.REFRESH_TOKEN,
             accessToken: accessToken,
+        };
+    }
+    else {
+        return {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS,
         };
     }
 };
